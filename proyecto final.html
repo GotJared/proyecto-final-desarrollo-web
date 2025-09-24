@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechSolutions - Proyecto Final</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --dark-primary: #2c3e50;
+            --dark-secondary: #34495e;
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        .dark-theme {
+            background-color: #1a1a1a;
+            color: #f8f9fa;
+        }
+        
+        .dark-theme .hero-section {
+            background: linear-gradient(135deg, var(--dark-primary) 0%, var(--dark-secondary) 100%);
+        }
+        
+        .dark-theme .navbar {
+            background-color: #212529 !important;
+        }
+        
+        .dark-theme .card {
+            background-color: #343a40;
+            border-color: #495057;
+            color: #f8f9fa;
+        }
+        
+        .dark-theme .form-control {
+            background-color: #495057;
+            border-color: #6c757d;
+            color: #f8f9fa;
+        }
+        
+        .dark-theme .form-control:focus {
+            background-color: #495057;
+            border-color: #0d6efd;
+            color: #f8f9fa;
+        }
+        
+        .dark-theme .bg-light {
+            background-color: #495057 !important;
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .animate-delay-1 {
+            animation-delay: 0.3s;
+            animation-fill-mode: both;
+        }
+        
+        .animate-delay-2 {
+            animation-delay: 0.6s;
+            animation-fill-mode: both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .pulse-icon {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .section-padding {
+            padding: 80px 0;
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+            .display-5 {
+                font-size: 2rem;
+            }
+            .section-padding {
+                padding: 60px 0;
+            }
+        }
+        
+        .reflection-box {
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 4px solid var(--primary-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+        
+        .dark-theme .reflection-box {
+            background: linear-gradient(45deg, rgba(44, 62, 80, 0.3), rgba(52, 73, 94, 0.3));
+            border-left-color: var(--dark-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand text-primary" href="#inicio">TechSolutions</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">🏠 Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">👥 Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicios">💼 Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">📧 Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link" onclick="toggleTheme()" id="themeToggle">🌙</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4 animate-fade-in">
+                        Soluciones Tecnológicas Innovadoras
+                    </h1>
+                    <p class="lead mb-4 animate-fade-in animate-delay-1">
+                        Transformamos ideas en realidades digitales. Creamos experiencias web excepcionales 
+                        que impulsan tu negocio hacia el éxito en el mundo digital.
+                    </p>
+                    <div class="animate-fade-in animate-delay-2">
+                        <a href="#servicios" class="btn btn-light btn-lg me-3 shadow-lg">Nuestros Servicios</a>
+                        <a href="#contacto" class="btn btn-outline-light btn-lg shadow-lg">Contáctanos</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="position-relative">
+                        <div class="bg-white bg-opacity-10 rounded-circle p-5 d-inline-block pulse-icon">
+                            <div style="font-size: 120px;">💻</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Nosotros -->
+    <section id="nosotros" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="display-5 fw-bold mb-4">Sobre Nosotros</h2>
+                    <p class="lead">
+                        Somos un equipo apasionado de desarrolladores y diseñadores comprometidos 
+                        con la excelencia tecnológica.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="text-primary mb-3 service-icon">👥</div>
+                            <h5 class="card-title">Nuestro Equipo</h5>
+                            <p class="card-text">
+                                Profesionales experimentados con más de 10 años desarrollando 
+                                soluciones web innovadoras y escalables.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="text-primary mb-3 service-icon">🎯</div>
+                            <h5 class="card-title">Nuestra Misión</h5>
+                            <p class="card-text">
+                                Transformar ideas en soluciones digitales que generen valor real 
+                                para nuestros clientes y usuarios finales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="text-primary mb-3 service-icon">⭐</div>
+                            <h5 class="card-title">Nuestros Valores</h5>
+                            <p class="card-text">
+                                Innovación, calidad, transparencia y compromiso con la satisfacción 
+                                del cliente son los pilares de nuestro trabajo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resumen reflexivo -->
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="reflection-box">
+                        <h4 class="text-primary mb-3">Reflexión sobre el Desarrollo Web Moderno</h4>
+                        <p class="mb-3">
+                            En este proyecto he aplicado conceptos fundamentales del desarrollo web moderno, 
+                            integrando HTML5 semántico, CSS3 con Bootstrap para crear una experiencia de usuario 
+                            responsive que se adapta perfectamente a diferentes dispositivos y tamaños de pantalla.
+                        </p>
+                        <p class="mb-0">
+                            <strong>Tecnologías implementadas:</strong> HTML5 semántico, CSS3 con variables personalizadas, 
+                            Bootstrap 5 para diseño responsive, JavaScript para interactividad, validación de formularios 
+                            en tiempo real, navegación suave entre secciones, animaciones CSS, y buenas prácticas de 
+                            accesibilidad web. El código demuestra la importancia de crear interfaces modernas que 
+                            prioricen tanto la funcionalidad como la experiencia del usuario, aplicando principios 
+                            de UX/UI y desarrollo frontend contemporáneo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section id="servicios" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold mb-4">Nuestros Servicios</h2>
+                <p class="lead">Soluciones completas para tu presencia digital</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">🌐</div>
+                            <h5 class="card-title mb-3">Desarrollo Web</h5>
+                            <p class="card-text text-muted mb-3">
+                                Sitios web modernos y responsivos con las últimas tecnologías
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="text-primary mb-1"><small>✓ React & Vue.js</small></li>
+                                <li class="text-primary mb-1"><small>✓ Responsive Design</small></li>
+                                <li class="text-primary mb-1"><small>✓ SEO Optimizado</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">📱</div>
+                            <h5 class="card-title mb-3">Aplicaciones Móviles</h5>
+                            <p class="card-text text-muted mb-3">
+                                Apps nativas e híbridas para iOS y Android
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="text-primary mb-1"><small>✓ React Native</small></li>
+                                <li class="text-primary mb-1"><small>✓ Flutter</small></li>
+                                <li class="text-primary mb-1"><small>✓ Progressive Web Apps</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">🛒</div>
+                            <h5 class="card-title mb-3">E-commerce</h5>
+                            <p class="card-text text-muted mb-3">
+                                Tiendas online completas con sistemas de pago integrados
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="text-primary mb-1"><small>✓ Shopify</small></li>
+                                <li class="text-primary mb-1"><small>✓ WooCommerce</small></li>
+                                <li class="text-primary mb-1"><small>✓ Pasarelas de Pago</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="card h-100 shadow-sm border-0 hover-lift">
+                        <div class="card-body text-center p-4">
+                            <div class="service-icon">💼</div>
+                            <h5 class="card-title mb-3">Consultoría Digital</h5>
+                            <p class="card-text text-muted mb-3">
+                                Estrategias digitales personalizadas para tu negocio
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="text-primary mb-1"><small>✓ Análisis UX/UI</small></li>
+                                <li class="text-primary mb-1"><small>✓ Estrategia Digital</small></li>
+                                <li class="text-primary mb-1"><small>✓ Optimización</small></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="text-center mb-5">
+                        <h2 class="display-5 fw-bold mb-4">Contáctanos</h2>
+                        <p class="lead">¿Tienes un proyecto en mente? Hablemos</p>
+                    </div>
+
+                    <div id="confirmationAlert" class="alert alert-success alert-dismissible fade" role="alert" style="display: none;">
+                        <strong>¡Su información ha sido enviada!</strong> 
+                        Nos pondremos en contacto contigo pronto.
+                        <button type="button" class="btn-close" onclick="hideConfirmation()"></button>
+                    </div>
+
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <form id="contactForm" onsubmit="handleSubmit(event)">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="nombre" class="form-label">
+                                            👤 Nombre *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="nombre"
+                                            name="nombre"
+                                            placeholder="Tu nombre completo"
+                                            required
+                                            minlength="3"
+                                        >
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="correo" class="form-label">
+                                            📧 Correo Electrónico *
+                                        </label>
+                                        <input
+                                            type="email"
+                                            class="form-control"
+                                            id="correo"
+                                            name="correo"
+                                            placeholder="tu@email.com"
+                                            required
+                                        >
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="telefono" class="form-label">
+                                            📱 Número de Teléfono
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            class="form-control"
+                                            id="telefono"
+                                            name="telefono"
+                                            placeholder="1234567890"
+                                            pattern="[0-9]+"
+                                        >
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="mensaje" class="form-label">
+                                            💬 Mensaje
+                                        </label>
+                                        <textarea
+                                            class="form-control"
+                                            id="mensaje"
+                                            name="mensaje"
+                                            rows="4"
+                                            placeholder="Cuéntanos sobre tu proyecto..."
+                                        ></textarea>
+                                    </div>
+
+                                    <div class="col-12 text-center mt-4">
+                                        <button type="submit" class="btn btn-primary btn-lg px-5 shadow-lg">
+                                            📨 Enviar Mensaje
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="mb-0">TechSolutions</h5>
+                    <small>Transformando ideas en realidades digitales</small>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <small>&copy; 2024 TechSolutions. Todos los derechos reservados.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Tema oscuro/claro
+        let isDarkTheme = false;
+
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            const navbar = document.getElementById('mainNav');
+            
+            if (isDarkTheme) {
+                body.classList.add('dark-theme');
+                navbar.classList.remove('navbar-light', 'bg-light');
+                navbar.classList.add('navbar-dark', 'bg-dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                body.classList.remove('dark-theme');
+                navbar.classList.remove('navbar-dark', 'bg-dark');
+                navbar.classList.add('navbar-light', 'bg-light');
+                themeToggle.textContent = '🌙';
+            }
+        }
+
+        // Validación del formulario
+        function validateForm(form) {
+            let isValid = true;
+            const formData = new FormData(form);
+            
+            // Validar nombre
+            const nombre = formData.get('nombre');
+            const nombreField = form.querySelector('#nombre');
+            if (!nombre || nombre.length < 3) {
+                nombreField.classList.add('is-invalid');
+                nombreField.nextElementSibling.textContent = 'El nombre debe tener al menos 3 caracteres';
+                isValid = false;
+            } else {
+                nombreField.classList.remove('is-invalid');
+                nombreField.classList.add('is-valid');
+            }
+
+            // Validar correo
+            const correo = formData.get('correo');
+            const correoField = form.querySelector('#correo');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!correo || !emailRegex.test(correo)) {
+                correoField.classList.add('is-invalid');
+                correoField.nextElementSibling.textContent = 'Por favor ingresa un correo válido';
+                isValid = false;
+            } else {
+                correoField.classList.remove('is-invalid');
+                correoField.classList.add('is-valid');
+            }
+
+            // Validar teléfono (opcional pero si se proporciona debe ser válido)
+            const telefono = formData.get('telefono');
+            const telefonoField = form.querySelector('#telefono');
+            if (telefono) {
+                const phoneRegex = /^\d+$/;
+                if (!phoneRegex.test(telefono)) {
+                    telefonoField.classList.add('is-invalid');
+                    telefonoField.nextElementSibling.textContent = 'El teléfono debe contener solo números';
+                    isValid = false;
+                } else {
+                    telefonoField.classList.remove('is-invalid');
+                    telefonoField.classList.add('is-valid');
+                }
+            }
+
+            return isValid;
+        }
+
+        // Manejar envío del formulario
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            
+            if (validateForm(form)) {
+                // Mostrar mensaje de confirmación
+                showConfirmation();
+                
+                // Resetear formulario después de 3 segundos
+                setTimeout(() => {
+                    form.reset();
+                    form.querySelectorAll('.is-valid').forEach(field => {
+                        field.classList.remove('is-valid');
+                    });
+                    hideConfirmation();
+                }, 3000);
+            }
+        }
+
+        // Mostrar mensaje de confirmación
+        function showConfirmation() {
+            const alert = document.getElementById('confirmationAlert');
+            alert.style.display = 'block';
+            alert.classList.add('show');
+        }
+
+        // Ocultar mensaje de confirmación
+        function hideConfirmation() {
+            const alert = document.getElementById('confirmationAlert');
+            alert.classList.remove('show');
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 150);
+        }
+
+        // Limpiar validación al escribir
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('is-invalid');
+                });
+            });
+        });
+
+        // Smooth scroll para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Actualizar navegación activa al hacer scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionHeight = section.offsetHeight;
+                if (sectionTop <= 100 && sectionTop + sectionHeight > 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
